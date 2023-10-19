@@ -1,0 +1,26 @@
+---
+- name: Deploy Docker App to Dev
+  hosts: dev_hosts
+  tasks:
+    - name: Ensure Docker container is running on Dev
+      docker_container:
+        name: my-web-app-dev
+        image: your_dockerhub_username/my-web-app:dev
+        state: started
+        recreate: yes
+        ports:
+          - "80:80"
+  when: branch == 'dev'
+
+- name: Deploy Docker App to Prod
+  hosts: prod_hosts
+  tasks:
+    - name: Ensure Docker container is running on Prod
+      docker_container:
+        name: my-web-app-prod
+        image: your_dockerhub_username/my-web-app:prod
+        state: started
+        recreate: yes
+        ports:
+          - "80:80"
+  when: branch == 'prod'

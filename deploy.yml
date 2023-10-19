@@ -1,26 +1,39 @@
----
-- name: Deploy Docker App to Dev
-  hosts: dev
-  tasks:
-    - name: Ensure Docker container is running on Dev
-      docker_container:
-        name: my-web-app-dev
-        image: 9989228601/my-web-app:dev
-        state: started
-        recreate: yes
-        ports:  
-          - "80:80"
-      when: branch == 'dev'
+# ---
+# - name: Deploy Docker App to Dev
+#   hosts: dev
+#   tasks:
+#     - name: Ensure Docker container is running on Dev
+#       docker_container:
+#         name: my-web-app-dev
+#         image: 9989228601/my-web-app:dev
+#         state: started
+#         recreate: yes
+#         ports:  
+#           - "80:80"
+#       when: branch == 'dev'
 
-- name: Deploy Docker App to Prod
-  hosts: pro
+# - name: Deploy Docker App to Prod
+#   hosts: pro
+#   tasks:
+#     - name: Ensure Docker container is running on Prod
+#       docker_container:
+#         name: my-web-app-prod
+#         image: 9989228601/my-web-app:prod
+#         state: started
+#         recreate: yes
+#         ports:
+#           - "80:80"
+#       when: branch == 'prod'
+---
+- name: Deploy Docker App
+  hosts: all
   tasks:
-    - name: Ensure Docker container is running on Prod
+    - name: Ensure Docker container is running
       docker_container:
-        name: my-web-app-prod
-        image: 9989228601/my-web-app:prod
+        name: my-web-app
+        image: "9989228601/my-web-app:{{ branch }}"
         state: started
         recreate: yes
         ports:
           - "80:80"
-      when: branch == 'prod'
+      when: branch == 'dev' or branch == 'prod'

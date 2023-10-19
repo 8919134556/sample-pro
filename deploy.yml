@@ -26,38 +26,20 @@
 #       when: branch == 'prod'
 ---
 - name: Deploy Docker App
-  hosts: dev
+  hosts: all
   tasks:
     - name: Ensure the previous Docker container is removed
       docker_container:
         name: my-web-app-container
         state: absent
+      when: "'{{ branch }}' in inventory_hostname"
 
     - name: Run new Docker container
       docker_container:
         name: my-web-app-container
-        image: "{{ image_name }}"
+        image: "9989228601/my-web-app:{{ branch }}"
         state: started
         recreate: yes
         ports:
           - "80:80"
-        when: branch == 'dev'
-
-
-- name: Deploy Docker App
-  hosts: pro
-  tasks:
-    - name: Ensure the previous Docker container is removed
-      docker_container:
-        name: my-web-app-container
-        state: absent
-
-    - name: Run new Docker container
-      docker_container:
-        name: my-web-app-container
-        image: "{{ image_name }}"
-        state: started
-        recreate: yes
-        ports:
-          - "80:80"
-        when: branch == 'pro'
+      when: "'{{ branch }}' in inventory_hostname"

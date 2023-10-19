@@ -10,7 +10,7 @@
         recreate: yes
         ports:  
           - "80:80"
-  when: branch == 'dev'
+      when: branch == 'dev'
 
 - name: Deploy Docker App to Prod
   hosts: pro
@@ -23,4 +23,4 @@
         recreate: yes
         ports:
           - "80:80"
-  when: branch == 'prod'
+      when: branch == 'prod'

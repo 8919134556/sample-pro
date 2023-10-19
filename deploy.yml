@@ -4,7 +4,7 @@
   tasks:
     - name: Ensure Docker container is running on Dev
       docker_container:
-        name: my-web-app-dev
+        name: my-web-app-dev1
         image: 9989228601/my-web-app:dev
         state: started
         recreate: yes
@@ -17,7 +17,7 @@
   tasks:
     - name: Ensure Docker container is running on Prod
       docker_container:
-        name: my-web-app-prod
+        name: my-web-app-prod2
         image: 9989228601/my-web-app:prod
         state: started
         recreate: yes

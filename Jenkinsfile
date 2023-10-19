@@ -37,7 +37,7 @@ pipeline {
             }
             steps {
                 // Use Ansible for deployment to Dev
-                sh "ansible-playbook -i ${WORKSPACE}/multi-branch_dev/inventory.ini ${WORKSPACE}/multi-branch_dev/deploy.yml -e branch=${BRANCH_NAME}"
+                sh "ansible-playbook -i ${WORKSPACE}/inventory.ini ${WORKSPACE}/deploy.yml -e branch=${BRANCH_NAME}"
             }
         }
 
@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
                 // Use Ansible for deployment to Prod
-                sh "ansible-playbook -i ${WORKSPACE}/multi-branch_dev/inventory.ini ${WORKSPACE}/multi-branch_dev/deploy.yml -e branch=${BRANCH_NAME}"
+                sh "ansible-playbook -i ${WORKSPACE}/inventory.ini ${WORKSPACE}/deploy.yml -e branch=${BRANCH_NAME}"
             }
         }
     }

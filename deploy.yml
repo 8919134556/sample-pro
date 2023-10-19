@@ -5,7 +5,7 @@
     - name: Ensure Docker container is running on Dev
       docker_container:
         name: my-web-app-dev
-        image: 9989228601/my-web-app
+        image: 9989228601/my-web-app:dev
         state: started
         recreate: yes
         ports:  
@@ -18,7 +18,7 @@
     - name: Ensure Docker container is running on Prod
       docker_container:
         name: my-web-app-prod
-        image: 9989228601/my-web-app
+        image: 9989228601/my-web-app:prod
         state: started
         recreate: yes
         ports:

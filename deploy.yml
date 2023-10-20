@@ -25,10 +25,9 @@
 #           - "80:80"
 #       when: branch == 'prod'
 ---
-- name: Deploy Docker App
-  hosts: all
+- name: Deploy Docker App to Dev
+  hosts: dev
   tasks:
-    # For dev branch
     - name: Ensure the previous Docker container (dev) is removed
       docker_container:
         name: my-web-app-container-dev
@@ -45,7 +44,9 @@
           - "80:80"
       when: branch == 'dev'
 
-    # For prod branch
+- name: Deploy Docker App to Prod
+  hosts: prod
+  tasks:
     - name: Ensure the previous Docker container (prod) is removed
       docker_container:
         name: my-web-app-container-prod
@@ -61,4 +62,5 @@
         ports:
           - "80:80"
       when: branch == 'prod'
+
 

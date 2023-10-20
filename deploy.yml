@@ -45,7 +45,7 @@
       when: branch == 'dev'
 
 - name: Deploy Docker App to Prod
-  hosts: prod
+  hosts: pro
   tasks:
     - name: Ensure the previous Docker container (prod) is removed
       docker_container:
